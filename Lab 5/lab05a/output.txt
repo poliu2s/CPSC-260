@@ -1,0 +1,43 @@
+
+Have created a new full time employee:
+	Name: John
+	Starting Year: 1998
+	Starting Pay Period: 1
+	Monthly Wage: $1200
+
+John's 
+1997 pay period #24 salary = $0
+1998 pay period #1 salary = $600
+1998 pay period #2 salary = $600
+1998 pay period #3 salary = $600
+1999 pay period #1 salary = $600
+2170 pay period #3 salary = $600
+
+Have created a new full time employee:
+	Name: Peter
+	Starting Year: 1992
+	Starting Pay Period: 4
+	Monthly Wage: $1400
+
+Peter's 
+1992 pay period #3 salary = $0
+1992 pay period #4 salary = $700
+1992 pay period #5 salary = $700
+1992 pay period #6 salary = $700
+1993 pay period #4 salary = $700
+2164 pay period #6 salary = $700
+
+Have created a new full time employee:
+	Name: Xiaoming
+	Starting Year: 1982
+	Starting Pay Period: 10
+	Monthly Wage: $1750
+
+Xiaoming's 
+1982 pay period #9 salary = $0
+1982 pay period #10 salary = $875
+1982 pay period #11 salary = $875
+1982 pay period #12 salary = $875
+1983 pay period #10 salary = $875
+2154 pay period #12 salary = $875
+hello

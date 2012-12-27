@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "rpnCalculator", "rpnCalculator.vcxproj", "{DC73C668-8F2C-BA1D-8ECB-21E59F1D1C16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC73C668-8F2C-BA1D-8ECB-21E59F1D1C16}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DC73C668-8F2C-BA1D-8ECB-21E59F1D1C16}.Debug|Win32.Build.0 = Debug|Win32
+		{DC73C668-8F2C-BA1D-8ECB-21E59F1D1C16}.Release|Win32.ActiveCfg = Release|Win32
+		{DC73C668-8F2C-BA1D-8ECB-21E59F1D1C16}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

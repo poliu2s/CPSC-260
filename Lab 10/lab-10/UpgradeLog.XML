@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="Lab-10">
+</Property><Property Name="Solution File" Value="D:\Desktop\CPSC 260\Lab 10\lab-10\Lab-10.sln">
+</Property><Property Name="Date" Value="Sunday, July 25, 2010">
+</Property><Property Name="Time" Value="20:35 PM">
+</Property></Properties><Event ErrorLevel="0" Project="trees" Source="trees\trees.vcproj" Description="Converting project file 'D:\Desktop\CPSC 260\Lab 10\lab-10\trees\trees.vcproj'.">
+</Event><Event ErrorLevel="1" Project="trees" Source="trees\trees.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="trees" Source="trees\trees.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="trees" Source="trees\trees.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="trees" Source="trees\trees.vcproj" Description="Done converting to new project file 'D:\Desktop\CPSC 260\Lab 10\lab-10\trees\trees.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="trees" Source="trees\trees.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="quick" Source="quick\quick.vcproj" Description="Converting project file 'D:\Desktop\CPSC 260\Lab 10\lab-10\quick\quick.vcproj'.">
+</Event><Event ErrorLevel="1" Project="quick" Source="quick\quick.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="quick" Source="quick\quick.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="quick" Source="quick\quick.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="quick" Source="quick\quick.vcproj" Description="Done converting to new project file 'D:\Desktop\CPSC 260\Lab 10\lab-10\quick\quick.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="quick" Source="quick\quick.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="heap" Source="heap\heap.vcproj" Description="Converting project file 'D:\Desktop\CPSC 260\Lab 10\lab-10\heap\heap.vcproj'.">
+</Event><Event ErrorLevel="1" Project="heap" Source="heap\heap.vcproj" Description="VCWebServiceProxyGeneratorTool is no longer supported. The tool has been removed from your project settings.">
+</Event><Event ErrorLevel="1" Project="heap" Source="heap\heap.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="1" Project="heap" Source="heap\heap.vcproj" Description="Attribute 'Detect64BitPortabilityProblems' of 'VCCLCompilerTool' is not supported in this version and has been removed during conversion.">
+</Event><Event ErrorLevel="0" Project="heap" Source="heap\heap.vcproj" Description="Done converting to new project file 'D:\Desktop\CPSC 260\Lab 10\lab-10\heap\heap.vcxproj'.">
+</Event><Event ErrorLevel="3" Project="heap" Source="heap\heap.vcproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="Lab-10.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="Lab-10.sln" Description="Converted">
+</Event></UpgradeLog>

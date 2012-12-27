@@ -1,0 +1,40 @@
+
+
+Course: 	CPSC 260
+Assignment:	Project
+Author: 	Po Liu
+ID: 		x2f7
+Date: 		28 July 2010
+
+
+
+Project Name: Word Search Helper Program
+
+
+Project Description:
+
+This program solves word search puzzles given to it through a .txt file.
+The sample .txt file contains a 10x10 matrix of characters that 
+simulate a word search puzzle which is then specified within program.
+The user of the program only has to specify which words to search for
+and enters it into the GUI which. It then highlights the first character
+in red and the rest of the characters in blue. The program is capable of
+looking left, right, up, down, diagonally up-right, diagonally up-left,
+diagonally down-left, diagonally down-right relative to the first character.
+
+The program is limited in that currently it must accept a 10x10 matrix 
+from an external .txt file although simple motifications can be made so
+that it accepts files with different dimensions. Another limitation is that
+the program only finds the first word that it searches for in the
+text matrix so if the word of interest is repeated, the repeats will
+not be found.
+
+
+
+For marking purposes:
+
+-The 4 user defined classes are: searchWindow, data, inputFormatter, and MyLinkedList
+-Inheritance is used in searchWindow.h as it inherits functions from window.h
+-A virtual method is implemented in the destructor of searchWindow
+-A Dynamic data structure in the form of a linked list is used in MyLinkedList
+-searchWindow is also a GUI that has user interaction (text box)

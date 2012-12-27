@@ -1,0 +1,848 @@
+// file: MapAVL.template
+// Template implementation file for the MapAVL class
+
+
+/*--------------------------------------------------------------------------*/
+/*                                                                          */
+/*  This class implements a map using AVL trees                             */
+/*                                                                          */
+/*- Modification History ---------------------------------------------------*/
+/*  When:       Who:                    Comments:                           */
+/*                                                                          */
+/*  18-Mar-92   Christopher G. Healey   Initial implementation              */
+/*  07-Jan-93   Christopher G. Healey   Converted to work as a dictionary   */
+/*  04-Jul-93   Christopher G. Healey   Converted to C++                    */
+/*  28-Jul-98   Felix Chang             Change the interface to             */
+/*                                        follow the other Map template     */
+/*                                        class examples.                   */
+/*  20-Jun-01   Paul Carter             Changed so that this class is       */
+/*                                      derived from MapAbstract base class */
+/*--------------------------------------------------------------------------*/
+
+
+template <class Key, class Value>
+MapAVL<Key,Value>::MapAVL( )
+// Default constructor
+// POST: An empty MapAVL is created
+{
+   root = NULL;
+}
+
+
+template <class Key, class Value>
+MapAVL<Key,Value>::MapAVL( const MapAVL<Key,Value>& someMapAVL )
+// Copy constructor
+// POST: A new MapAVL is created containing the same elements as originalMapAVL
+{
+   copy( someMapAVL );
+}
+
+
+template <class Key, class Value>
+MapAVL<Key,Value>::~MapAVL()
+// Destructor
+// POST: The MapAVL object is destroyed
+{
+   eraseTree( root );
+}
+
+
+template <class Key, class Value>
+MapAVL<Key,Value>& MapAVL<Key,Value>::operator=( const MapAVL<Key,Value>& someMapAVL )
+// Member operator function
+// POST:  The contents of 'otherMapAVL' are copied into the current MapAVL
+{
+   if ( &someMapAVL != this )
+   {
+      eraseTree( root );
+      copy( someMapAVL );
+   }
+
+   return *this;
+}
+
+
+template <class Key, class Value>
+bool MapAVL<Key,Value>::empty( const Key& key ) const
+// Pre: key has been initialized
+// Post: if the key is not in the map true is returned; otherwise
+// false is returned
+{
+   MapAVLNode<Key,Value>* ptr = root;
+
+   while(ptr != NULL)
+   {
+     if (ptr->key == key)
+     {
+        return false;
+     }
+
+     if (ptr->key < key)
+     {
+        ptr = ptr->right;
+     }
+     else
+     {
+        ptr = ptr->left;
+     }
+   }
+
+   return true;
+}
+
+
+template <class Key, class Value>
+void MapAVL<Key,Value>::erase( const Key& key )
+// Pre: key has been initialized
+// Post: if key is in the map it has been removed; otherwise
+// map is not changed
+{
+   bool shorter;                      // Tree shorter flag
+
+   root = eraseNode( root, key, shorter );
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::eraseNode( MapAVLNode<Key,Value>* tree, const Key& key, bool& shorter )
+// Private helper function that erases a key from a subtree.
+// PRE:   key has been initialized
+// POST:  If key is already in the tree, then it is deleted (and the new root returned)
+//        otherwise map is not changed
+//        Also, shorter will be set according to whether the tree has become shorter or not.
+{
+   //  First possibility, root is NULL, so this is the bottom of the tree.
+   //  Node with given key certainly doesn't exist; so return NULL.
+
+   if ( tree == NULL )
+   {
+      shorter = false;            // Height of tree unchanged
+      return NULL;
+   }
+
+   //  Second possibility, key equal to root's key, so found node. Node to
+   //  delete has two children, find it's predecessor, copy predecessor's
+   //  info into the root node, then delete the predecessor
+
+   if ( tree->key == key && tree->left && tree->right )
+   {
+      MapAVLNode<Key,Value>* child;    // Child of root node
+
+      // Find the predecessor of root.
+      child = tree->left;
+      while( child->right != NULL ) {
+         child = child->right;
+      }
+
+      tree->key = child->key;
+      tree->value = child->value;
+
+      tree->left = eraseNode( tree->left, child->key, shorter );
+
+      //  If the subtree shrunk in size, we must check to see if we are now
+      //  unbalanced. There are three possible cases:
+      //
+      //  1. currently LH, left subtree shrunk, so we are now EQ, and we
+      //     report that this tree shrunk in height
+      //  2. currently EQ, left subtree shrunk, so we are now RH, and we
+      //     report that this tree did not shrink in height
+      //  3. currently RH, left subtree shrunk, so we are out of balance,
+      //     and must perform a rotation to bring ourselves back into balance
+      //
+      //  If the subtree didn't shrink in size, then we didn't shrink either
+
+      if ( shorter )
+        {
+          switch( tree->factor )          // Determine current balancing factor
+          {
+            case LH:                      // Now, left and right same height
+               shorter = true;
+               tree->factor = EQ;
+               return tree;
+
+            case EQ:                      // Now, right 1 higher than left
+               shorter = false;
+               tree->factor = RH;
+               return tree;
+
+            case RH:                      // Now, we must rebalance 
+               shorter = (tree->factor != EQ);
+               return rightBalance( tree );
+           }
+           shorter = false;    // If subtree isn't shorter, then this tree isn't shorter either.
+           return tree;
+        }
+   }
+
+   //  Third possibility, key equal to root's key, so found node. Node to
+   //  delete has at most one child, simply have the parent point around
+   //  it to it's child subtree, or NULL if no subtrees exist
+
+   if ( tree->key == key )
+   {
+      shorter = true;   // Subtree is shorter
+
+      if ( tree->left )   // Root has left subtree?
+      {
+        MapAVLNode<Key,Value>* result = tree->left;
+        delete tree;
+        // The following code is necessary as of Release 3.4.0 of g++
+        // The code
+        //
+        //     count--;
+        //
+        // does not work because members inherited from the base class
+        // are not recognized in standard C++.  They either have to be
+        // fully qualified (as below) or you can instead say
+        //
+        //     this->count--;
+        //
+        MapAbstract<Key,Value>::count--;
+        return result;
+      }
+
+      if ( tree->right )   // Root has right subtree?
+      {
+        MapAVLNode<Key,Value>* result = tree->right;
+        delete tree;
+        MapAbstract<Key,Value>::count--;
+        return result;
+      }
+
+      // No left nor right subtree
+      delete tree;
+      MapAbstract<Key,Value>::count--;
+      return NULL;
+   }
+
+   //  Fourth possibility, key is less than root's key, so search the left
+   //  subtree recursively
+
+   if ( tree->key > key )
+   {
+      tree->left = eraseNode( tree->left, key, shorter );
+
+      //  If the subtree shrunk in size, we must check to see if we are now
+      //  unbalanced.  There are three possible cases:
+      //
+      //  1. currently LH, left subtree shrunk, so we are now EQ, and we
+      //     report that this tree shrunk in height
+      //  2. currently EQ, left subtree shrunk, so we are now RH, and we
+      //     report that this tree did not shrink in height
+      //  3. currently RH, left subtree shrunk, so we are out of balance,
+      //     and must perform a rotation to bring ourselves back into balance
+      //
+      //  If the subtree didn't shrink in size, then we didn't shrink, either
+
+      if ( shorter )
+      {
+         switch( tree->factor )         // Determine current balancing factor
+         {
+          case LH:                      // Now, left and right same height
+             shorter = true;
+             tree->factor = EQ;
+             return tree;
+
+          case EQ:                      // Now, right 1 higher than left
+             shorter = false;
+             tree->factor = RH;
+             return tree;
+
+          case RH:                      // Now, we must rebalance 
+             shorter = (tree->factor != EQ);
+             return rightBalance( tree );
+         }
+      }
+
+      // If subtree isn't shorter, then this tree isn't shorter either.
+      // So just return the tree.
+      return tree;
+   }
+
+   //  Fifth (final) possibility, key is greater than root's key, so search the
+   //  right subtree recursively
+
+   tree->right = eraseNode( tree->right, key, shorter );
+
+   //  If the subtree shrunk in size, we must check to see if we are now
+   //  unbalanced, As mentioned in class, there are three possible cases:
+   //
+   //  1. currently RH, right subtree shrunk, so we are now EQ, and we
+   //     report that this tree shrunk in height
+   //  2. currently EQ, right subtree shrunk, so we are now LH, and we
+   //     report that this tree did not shrink in height
+   //  3. currently LH, right subtree shrunk, so we are out of balance,
+   //     and must perform a rotation to bring ourselves back into balance
+   //
+   //  If the subtree didn't shrink in size, then we didn't shrink, either
+
+   if ( shorter )
+   {
+      switch( tree->factor )            // Determine current balancing factor
+      {
+          case RH:                      // Now, left and right same height
+             shorter = true;
+             tree->factor = EQ;
+             return tree;
+
+          case EQ:                      // Now, left 1 higher than right
+             shorter = false;
+             tree->factor = LH;
+             return tree;
+
+          case LH:                      // Now, we must rebalance ourselves
+             shorter = (tree->factor != EQ );
+             return leftBalance( tree );
+      }
+   }
+
+   // If subtree isn't shorter, then this tree isn't shorter either.
+   // So just return the tree.
+   return tree;
+}
+
+
+template <class Key, class Value>
+Value& MapAVL<Key,Value>::operator[]( const Key& key )
+// Pre: key has been initialized
+// Post: if key is in the map, reference to value corresponding to key 
+//       has been returned; otherwise key has been added to map with 
+//       corresponding default value
+// Exception: if not enough memory to add key, map_full has been thrown
+{
+   MapAVLNode<Key,Value>* ptr;
+
+   if (root == NULL)  // No such key. So add it.
+   {
+     return add(key);
+   }
+
+   ptr = root;
+
+   while( true )
+   {
+     if (ptr->key == key)
+     {
+        return ptr->value;
+     }
+
+     if (ptr->key < key)
+     {
+        if (ptr->right == NULL)  // No such key. So add it.
+        {
+           return add(key);
+        }
+        ptr = ptr->right;
+     }
+     else
+     {
+        if (ptr->left == NULL)  // No such key. So add it.
+        {
+           return add(key);
+        }
+        ptr = ptr->left;
+     }
+   }
+}
+
+
+template <class Key, class Value>
+Value& MapAVL<Key,Value>::add( const Key& key )
+// Private helper function that adds a key to a tree.
+// PRE:   key has been initialized
+// POST:  If key is not already in the tree, then it is added.
+//        otherwise map is not changed.
+// Exception: if not enough memory to add key, map_full exception is thrown
+{
+   bool  taller;         // Tree taller flag
+   
+   try
+   {
+      root = addNode( root, key, taller );
+   }
+   catch( bad_alloc& )
+   {
+      throw map_full();
+   }
+
+   return (*this)[key];
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::addNode( MapAVLNode<Key,Value>* tree, const Key& key, bool& taller )
+// Private helper function that adds a key to a subtree.
+// PRE:   key has been initialized 
+// POST:  If key is not already in the tree, then it is added (and the new root returned)
+//        otherwise map is not changed
+//        Also, taller will be set according to whether the tree has grown taller or not.
+{
+   //  First possibility, root is NULL, so this is the bottom of the tree.
+   //  Create a new leaf node, update it's information, and return
+
+   if ( tree == NULL )
+   {
+      MapAbstract<Key,Value>::count++;
+      tree = new MapAVLNode<Key,Value>;
+      tree->key = key;
+      tree->factor = EQ;
+      tree->left = NULL;
+      tree->right = NULL;
+      taller = true;                    // Height of tree has increased
+      return tree;                      // Return pointer to new node
+   }
+
+   //  Second possibility, the key stored at this node is the same as the
+   //  key we want to add, so just return its address.
+
+   if ( tree->key == key )
+   {
+      taller = false;                 // Height of tree unchanged
+      return tree;
+   }
+
+   //  Third possibility, the key we want to insert is less than the
+   //  key stored in the current node, so insert in the left subtree
+
+   if ( tree->key > key )
+   {
+      tree->left = addNode( tree->left, key, taller );
+
+      //  If the subtree grew in size, we must check to see if we are now
+      //  unbalanced. As mentioned in class, there are three possible cases:
+      //
+      //  1. currently RH, so left subtree grew, so we are now EQ, and we
+      //     report that this tree did not grow in height
+      //  2. currently EQ, so left subtree grew, so we are now LH, and we
+      //     report that this tree did grow in height
+      //  3. currently LH, so left subtree grew, so we are out of balance,
+      //     and must peform a rotation to bring ourselves back into balance
+      //
+      //  If the subtree didn't grow in size, than we didn't grow, either.
+
+      if ( taller )
+      {
+         switch( tree->factor )          // Determine current balance type
+         {
+           case RH:                      // Now, left and right same height
+              tree->factor = EQ;
+              taller = false;
+              return tree;
+
+           case EQ:                      // Now, left 1 higher than right
+              tree->factor = LH;
+              taller = true;
+              return tree;
+
+           case LH:                      // Now, we must rebalance ourselves
+              tree = leftBalance( tree );
+              taller = false;
+              return tree;
+         }
+      }
+
+      // If the subtree is not taller, then this tree is not taller either. Just return it.
+      return tree;
+   }
+
+   //  Last possibility, the value we want to insert is greater than the
+   //  value stored in the current node, so insert in the right subtree
+
+   tree->right = addNode( tree->right, key, taller );
+
+   //  If the subtree grew in size, we must check to see if we are now
+   //  unbalanced. As mentioned in class, there are three possible cases:
+   //
+   //  1. currently LH, so right subtree grew, so we are now EQ, and we
+   //     report that this tree did not grow in height
+   //  2. currently EQ, so right subtree grew, so we are now RH, and we
+   //     report that this tree did grow in height
+   //  3. currently RH, so right subtree grew, so we are out of balance,
+   //     and must peform a rotation to bring ourselves back into balance
+   //
+   //  If the subtree didn't grow in size, than we didn't grow, either
+
+   if ( taller )
+   {
+       switch( tree->factor )          // Determine current balance type
+       {
+          case LH:                      // Now, left and right same height
+             tree->factor = EQ;
+             taller = false;
+             return tree;
+
+          case EQ:                      // Now, right 1 higher than left
+             tree->factor = RH;
+             taller = true;
+             return tree;
+
+          case RH:                      // Now, we must rebalance ourselves
+             tree = rightBalance( tree );
+             taller = false;
+             return tree;
+       }
+   }
+
+  // If the subtree is not taller, then this tree is not taller either. Just return it.
+  return tree;
+}
+
+
+template <class Key, class Value>
+const Value& MapAVL<Key,Value>::operator[]( const Key& key ) const
+// Pre: key is in the map
+// Post: const reference to value corresponding to key has been returned
+// Exception: if the key is not in the map, not_valid_key has been thrown
+{
+   MapAVLNode<Key,Value>* ptr;
+
+   if (root == NULL)
+   {
+     throw not_valid_key();
+   }
+
+   ptr = root;
+
+   while( true )
+   {
+     if (ptr->key == key)
+     {
+        return ptr->value;
+     }
+
+     if (ptr->key < key)
+     {
+        if (ptr->right == NULL)
+        {
+           throw not_valid_key();
+        }
+        ptr = ptr->right;
+     }
+     else
+     {
+        if (ptr->left == NULL)
+        {
+           throw not_valid_key();
+        }
+        ptr = ptr->left;
+     }
+   }
+}
+
+
+template <class Key, class Value>
+void MapAVL<Key,Value>::dump( Pair<Key,Value>* data ) const
+// Pre: array is an array of pairs of Key and Value
+//      array must be at least size() elements long
+// Post: key and value pairs have been written into the array
+{
+   dumpHelper( root, data );
+}
+
+
+template <class Key, class Value>
+int MapAVL<Key,Value>::dumpHelper( MapAVLNode<Key,Value>* ptr, Pair<Key,Value>* data) const
+// Helper function that stores the keys and values of a particular SUBTREE
+//   into a user supplied array.
+// PRE:  array is an array of at least size() elements long.
+//
+// POST: All <key,value> pairs in the subtree is written into the array.
+//       The number of pairs written is returned as the function return value.
+{
+   int offset;
+
+   if (ptr == NULL)
+   {
+      return 0;
+   }
+
+   if (ptr->left != NULL)
+   {
+      offset = dumpHelper(ptr->left, data );
+   }
+   else
+   {
+      offset = 0;
+   }
+
+   data[offset].setLeft( ptr->key );
+   data[offset].setRight( ptr->value );
+
+   offset++;
+
+   return offset + dumpHelper(ptr->right, data + offset);
+}
+
+
+template <class Key, class Value>
+void MapAVL<Key,Value>::copy( const MapAVL<Key,Value>& someMapAVL )
+// Helper function used by MapAVL( const MapAVL& someMapAVL )
+// and operator=( const MapAVL& someMapAVL )
+// POST: The contents of 'someMapAVL' are copied into the current MapAVL
+{
+   count = someMapAVL.count;
+
+   if (someMapAVL -> root == NULL)
+   {
+      root = NULL;
+   }
+   else
+   {
+      root = new MapAVLNode<Key,Value>;
+      copySubTree(root, someMapAVL->root);
+   }
+}
+
+
+template <class Key, class Value>
+void MapAVL<Key,Value>::copySubTree( MapAVLNode<Key,Value>& root, const MapAVLNode<Key,Value>& otherRoot )
+// Private helper function that copies all values from 'otherRoot' into this root,
+//   including all children nodes.
+// POST:  All childr nodes are copied from 'otherRoot' into 'root'.
+{
+   root->factor = otherRoot->factor;
+   root->key = otherRoot->key;
+   root->value = otherRoot->value;
+
+   if (otherRoot->left != NULL)
+   {
+      root->left = new MapAVLNode<Key,Value>;
+      copySubTree( root->left, otherRoot->left );
+   }
+   else
+   {
+      root->left = NULL;
+   }
+
+   if (otherRoot->right != NULL)
+   {
+      root->right = new MapAVLNode<Key,Value>;
+      copySubTree( root->right, otherRoot->right );
+   }
+   else
+   {
+      root->right = NULL;
+   }
+}
+
+
+template <class Key, class Value>
+void MapAVL<Key,Value>::eraseTree( MapAVLNode<Key,Value>* ptr )
+// Private helper function that deletes a node and all children.
+// POST:  If the pointer is NULL, then nothing happens.
+//        otherwise, the node and all children are deleted.
+{
+   if (ptr != NULL)
+   {
+      eraseTree( ptr -> left );
+      eraseTree( ptr -> right );
+      delete ptr;
+   }
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::leftBalance( MapAVLNode<Key,Value>* tree )
+// Private helper function that performs with a LL or a LR rotation on a node.
+{
+   MapAVLNode<Key,Value>* left_sub;                     // Pointer to left subtree root
+
+   left_sub = tree->left;
+
+   //  There are three possible balance types for the left subtree, and
+   //  the type of rotation we perform depends on this, namely:
+   //
+   //  1. left subtree is LH, so perform an LL rotation
+   //  2. left subtree is RH, so perform an LR rotation
+   //  3. left subtree is EQ (this can only happen during deletion), so
+   //     perform an LL rotation
+
+   switch( left_sub -> factor )
+   {
+     case LH:
+       tree->factor = EQ;
+       left_sub->factor = EQ;
+       return LL_rotate( tree );
+
+     case RH:
+       tree->factor = EQ;
+       left_sub->factor = EQ;
+       left_sub->right->factor = EQ;
+       return LR_rotate( tree );
+
+     default:  // case EQ:
+       tree->factor = LH;
+       left_sub->factor = RH;
+       return LL_rotate( tree );
+   }
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::LL_rotate( MapAVLNode<Key,Value>* tree )
+// Private helper function that performs with a LL rotation on a node.
+
+   //  This private method performs an LL rotation. This means that we have
+   //  the following situation:
+   //
+   //          1(-2)             2(+0)
+   //         / \               / \
+   //        /   \             /   \
+   //       2(-1) D     ==>   /     \
+   //      / \               /       \
+   //     /   \             3(+0)     1(+0)
+   //    3(+0) C           / \       / \
+   //   / \               /   \     /   \
+   //  A   B             A     B   C     D
+   //
+   //  Note A, B, C, and D represent (possibly NULL) subtrees of nodes 1,
+   //  2, and 3. The only nodes will will modify are 1, 2, and 3
+   //
+   //  tree:  Pointer to root of subtree to rotate
+{
+   MapAVLNode<Key,Value>* node_2;          // Pointer to node 2
+
+   node_2 = tree->left;                 // Get a pointer to node 2
+
+   tree->left = node_2->right;          // Update node 1's left subtree
+   node_2->right = tree;                // Update node 2's right subtree
+
+   return node_2;                       // Node 2 is new root node
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::LR_rotate( MapAVLNode<Key,Value>* tree )
+// Private helper function that performs with a LR rotation on a node.
+
+   //  This private method performs an LR rotation. This means that we have
+   //  the following situation:
+   //
+   //         1(-2)               2(+0)
+   //        / \                 / \
+   //       /   \               /   \
+   //      3(+1) D     ==>     /     \
+   //     / \                 3(+0)   1(+0)
+   //    A   2(+0)           / \     / \
+   //       / \             /   \   /   \
+   //      B   C           A     B C     D
+   //
+   //  Note A, B, C, and D represent (possibly NULL) subtrees of nodes 1,
+   //  2, and 3. The only nodes will will modify are 1, 2, and 3
+   //
+   //  tree:  Pointer to root of subtree to rotate
+{
+   MapAVLNode<Key,Value>* node_2;          // Pointer to node 2
+   MapAVLNode<Key,Value>* node_3;          // Pointer to node 3
+
+   node_2 = tree->left->right;          // Get a pointer to node 2
+   node_3 = tree->left;                 // Get a pointer to node 3
+
+   tree->left = node_2->right;          // Update node 1's left subtree
+   node_3->right = node_2->left;        // Update node 3's right subtree
+   node_2->right = tree;                // Update node 2's right subtree
+   node_2->left = node_3;               // Update node 2's left subtree
+
+   return node_2;                       // Node 2 is new root node
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::rightBalance( MapAVLNode<Key,Value>* tree )
+// Private helper function that performs with a RL or a RR rotation on a node.
+{
+   MapAVLNode<Key,Value>* right_sub = tree->right;         // Pointer to right subtree root
+
+   //  There are three possible balance types for the right subtree, and
+   //  the type of rotation we perform depends on this, namely:
+   //
+   //  1. right subtree is RH, so perform an RR rotation
+   //  2. right subtree is LH, so perform an RL rotation
+   //  3. right subtree is EQ (this can only happen during deletion), so
+   //     perform an RR rotation
+
+   switch( right_sub->factor )
+   {
+     case RH:
+       tree->factor = EQ;
+       right_sub->factor = EQ;
+       return RR_rotate( tree );
+
+     case LH:
+       tree->factor = EQ;
+       right_sub->factor = EQ;
+       right_sub->left->factor = EQ;
+       return RL_rotate( tree );
+
+     default: // case EQ:
+       tree->factor = RH;
+       right_sub->factor = LH;
+       return RR_rotate( tree );
+   }
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::RL_rotate( MapAVLNode<Key,Value>* tree )
+// Private helper function that performs with a RL rotation on a node.
+
+   //  This private method performs an RL rotation. This means that we have
+   //  the following situation:
+   //
+   //     1(+2)                 2(+0)
+   //    / \                   / \
+   //   A   3(-1)     ==>     /   \
+   //      / \               /     \
+   //     /   \             1(+0)   3(+0)
+   //    2(+0) D           / \     / \
+   //   / \               /   \   /   \
+   //  B   C             A     B C     D
+   //
+   //  Note A, B, C, and D represent (possibly NULL) subtrees of nodes 1,
+   //  2, and 3. The only nodes will will modify are 1, 2, and 3
+   //
+   //  tree:  Pointer to root of subtree to rotate
+{
+   MapAVLNode<Key,Value>* node_2;          // Pointer to node 2
+   MapAVLNode<Key,Value>* node_3;          // Pointer to node 3
+
+   node_2 = tree->right->left;          // Get a pointer to node 2
+   node_3 = tree->right;                // Get a pointer to node 3
+
+   tree->right = node_2->left;          // Update node 1's right subtree
+   node_3->left = node_2->right;        // Update node 3's left subtree
+   node_2->left = tree;                 // Update node 2's left subtree
+   node_2->right = node_3;              // Update node 2's right subtree
+
+   return node_2;                       // Node 2 is new root node
+}
+
+
+template <class Key, class Value>
+MapAVLNode<Key,Value>* MapAVL<Key,Value>::RR_rotate( MapAVLNode<Key,Value>* tree )
+// Private helper function that performs with a RR rotation on a node.
+
+   //  This procedure performs an RR rotation. This means that we have the
+   //  following situation:
+   //
+   //     1(+2)                2(+0)
+   //    / \                  / \
+   //   A   2(+1)     ==>    /   \
+   //      / \              /     \
+   //     B   3(+0)        1(+0)   3(+0)
+   //        / \          / \     / \
+   //       C   D        A   B   C   D
+   //
+   //  Note A, B, C, and D represent (possibly NULL) subtrees of nodes 1,
+   //  2, and 3. The only nodes will will modify are 1, 2, and 3
+   //
+   //  tree:  Pointer to root of subtree to rotate
+{
+   MapAVLNode<Key,Value>* node_2;          // Pointer to node 2
+
+   node_2 = tree->right;                // Get a pointer to node 2
+
+   tree->right = node_2->left;          // Update node 1's right subtree
+   node_2->left = tree;                 // Update node 2's left subtree
+   return node_2;                       // Node 2 is new root node
+}

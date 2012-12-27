@@ -1,0 +1,37 @@
+﻿Build started 7/26/2010 1:26:17 AM.
+     1>Project "D:\Desktop\CPSC 260\Lab 10\lab-10\heap\heap.vcxproj" on node 2 (rebuild target(s)).
+     1>_PrepareForClean:
+         Deleting file "Debug\Heapsort.lastbuildstate".
+       InitializeBuildStatus:
+         Creating "Debug\Heapsort.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt ..\CTimer.cpp ..\HeapSort.cpp ..\randomInt.cpp
+         randomInt.cpp
+         HeapSort.cpp
+         CTimer.cpp
+         Generating Code...
+       ManifestResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Heapsort.exe.embed.manifest.res" Debug\Heapsort_manifest.rc 
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Heapsort.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.lib" /MACHINE:X86 Debug\Heapsort.exe.embed.manifest.res
+         Debug\CTimer.obj
+         Debug\HeapSort.obj
+         Debug\randomInt.obj
+       Manifest:
+         Deleting file "Debug\Heapsort.exe.embed.manifest".
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Heapsort.exe.embed.manifest" /manifest Debug\Heapsort.exe.intermediate.manifest
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\Heapsort.exe.embed.manifest.res" Debug\Heapsort_manifest.rc 
+       LinkEmbedManifest:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Heapsort.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE:NO /IMPLIB:"D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.lib" /MACHINE:X86 Debug\Heapsort.exe.embed.manifest.res
+         Debug\CTimer.obj
+         Debug\HeapSort.obj
+         Debug\randomInt.obj
+         heap.vcxproj -> D:\Desktop\CPSC 260\Lab 10\lab-10\Debug\Heapsort.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\Heapsort.unsuccessfulbuild".
+         Touching "Debug\Heapsort.lastbuildstate".
+     1>Done Building Project "D:\Desktop\CPSC 260\Lab 10\lab-10\heap\heap.vcxproj" (rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.82

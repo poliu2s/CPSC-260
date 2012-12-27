@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FullTime employee", "full\full.vcxproj", "{45B94F67-E180-40A1-92F4-FEA536D1224F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PartTime employee", "part\part.vcxproj", "{5D8E9CA6-F5DB-438F-9502-4913A85184D5}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Contract employee", "contract\contract.vcxproj", "{0FAA372F-50C5-4ADA-8379-0234019CAA7D}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "All employees", "employee\employee.vcxproj", "{5BDFF2F8-846D-4F4B-8950-1DFDF8270B16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45B94F67-E180-40A1-92F4-FEA536D1224F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{45B94F67-E180-40A1-92F4-FEA536D1224F}.Release|Win32.ActiveCfg = Release|Win32
+		{5D8E9CA6-F5DB-438F-9502-4913A85184D5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5D8E9CA6-F5DB-438F-9502-4913A85184D5}.Release|Win32.ActiveCfg = Release|Win32
+		{0FAA372F-50C5-4ADA-8379-0234019CAA7D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0FAA372F-50C5-4ADA-8379-0234019CAA7D}.Release|Win32.ActiveCfg = Release|Win32
+		{5BDFF2F8-846D-4F4B-8950-1DFDF8270B16}.Debug|Win32.ActiveCfg = Debug|Win32
+		{5BDFF2F8-846D-4F4B-8950-1DFDF8270B16}.Release|Win32.ActiveCfg = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

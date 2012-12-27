@@ -1,0 +1,147 @@
+﻿Build started 8/1/2010 2:10:10 AM.
+     1>Project "D:\Desktop\CPSC 260\Project 260\VehicleCompDisplay.vcxproj" on node 2 (build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\260Project.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IL:\Courses\cs260\ /Zi /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt VehicleCompDisplaySrc\data.cpp vehiclecompdisplaysrc\DisplaySleep.cpp vehiclecompdisplaysrc\Graph.cpp vehiclecompdisplaysrc\GUI.cpp VehicleCompDisplaySrc\inputFormatter.cpp vehiclecompdisplaysrc\main.cpp VehicleCompDisplaySrc\MyLinkedList.cpp VehicleCompDisplaySrc\searchWindow.cpp vehiclecompdisplaysrc\Simple_window.cpp vehiclecompdisplaysrc\Window.cpp
+         Window.cpp
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(107): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(112): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(117): warning C4018: '<' : signed/unsigned mismatch
+     1>vehiclecompdisplaysrc\Window.cpp(74): warning C4018: '<' : signed/unsigned mismatch
+     1>vehiclecompdisplaysrc\Window.cpp(76): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130): warning C4018: '<' : signed/unsigned mismatch
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130) : while compiling class template member function 'Graph_lib::Vector_ref<T>::~Vector_ref(void)'
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(99) : see reference to class template instantiation 'Graph_lib::Vector_ref<T>' being compiled
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+         Simple_window.cpp
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(107): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(112): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(117): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130): warning C4018: '<' : signed/unsigned mismatch
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130) : while compiling class template member function 'Graph_lib::Vector_ref<T>::~Vector_ref(void)'
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(99) : see reference to class template instantiation 'Graph_lib::Vector_ref<T>' being compiled
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+         searchWindow.cpp
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(107): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(112): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(117): warning C4018: '<' : signed/unsigned mismatch
+     1>VehicleCompDisplaySrc\searchWindow.cpp(117): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130): warning C4018: '<' : signed/unsigned mismatch
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130) : while compiling class template member function 'Graph_lib::Vector_ref<T>::~Vector_ref(void)'
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(99) : see reference to class template instantiation 'Graph_lib::Vector_ref<T>' being compiled
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+         MyLinkedList.cpp
+         main.cpp
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(107): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(112): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(117): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130): warning C4018: '<' : signed/unsigned mismatch
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130) : while compiling class template member function 'Graph_lib::Vector_ref<T>::~Vector_ref(void)'
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(99) : see reference to class template instantiation 'Graph_lib::Vector_ref<T>' being compiled
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+         inputFormatter.cpp
+         GUI.cpp
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(107): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(112): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(117): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130): warning C4018: '<' : signed/unsigned mismatch
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(130) : while compiling class template member function 'Graph_lib::Vector_ref<T>::~Vector_ref(void)'
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+                 d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\GUI.h(99) : see reference to class template instantiation 'Graph_lib::Vector_ref<T>' being compiled
+                 with
+                 [
+                     T=Graph_lib::Button
+                 ]
+         Graph.cpp
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(45): warning C4309: 'initializing' : truncation of constant value
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4305: 'initializing' : truncation from 'Graph_lib::Color::Transparency' to 'char'
+     1>d:\desktop\cpsc 260\project 260\vehiclecompdisplaysrc\Graph.h(47): warning C4309: 'initializing' : truncation of constant value
+     1>vehiclecompdisplaysrc\Graph.cpp(66): warning C4018: '<' : signed/unsigned mismatch
+     1>vehiclecompdisplaysrc\Graph.cpp(132): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>vehiclecompdisplaysrc\Graph.cpp(133): warning C4244: '=' : conversion from 'double' to 'int', possible loss of data
+     1>vehiclecompdisplaysrc\Graph.cpp(373): warning C4800: 'void *' : forcing value to bool 'true' or 'false' (performance warning)
+     1>vehiclecompdisplaysrc\Graph.cpp(398): warning C4018: '>=' : signed/unsigned mismatch
+         DisplaySleep.cpp
+         data.cpp
+         Generating Code...
+       ManifestResourceCompile:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Debug\260Project.exe.embed.manifest.res" Debug\260Project_manifest.rc 
+       Link:
+         C:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\Desktop\CPSC 260\Project 260\Debug\260Project.exe" /INCREMENTAL /NOLOGO /LIBPATH:L:\Courses\cs260\FLTKllib fltkd.lib wsock32.lib comctl32.lib fltkjpegd.lib fltkimagesd.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\260Project.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\Desktop\CPSC 260\Project 260\Debug\260Project.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\Desktop\CPSC 260\Project 260\Debug\260Project.lib" /MACHINE:X86 Debug\260Project.exe.embed.manifest.res
+         Debug\data.obj
+         Debug\DisplaySleep.obj
+         Debug\Graph.obj
+         Debug\GUI.obj
+         Debug\inputFormatter.obj
+         Debug\main.obj
+         Debug\MyLinkedList.obj
+         Debug\searchWindow.obj
+         Debug\Simple_window.obj
+         Debug\Window.obj
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\260Project.exe.embed.manifest" /manifest Debug\260Project.exe.intermediate.manifest
+         All outputs are up-to-date.
+       LinkEmbedManifest:
+         All outputs are up-to-date.
+         VehicleCompDisplay.vcxproj -> D:\Desktop\CPSC 260\Project 260\Debug\260Project.exe
+       FinalizeBuildStatus:
+         Deleting file "Debug\260Project.unsuccessfulbuild".
+         Touching "Debug\260Project.lastbuildstate".
+     1>Done Building Project "D:\Desktop\CPSC 260\Project 260\VehicleCompDisplay.vcxproj" (build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:12.11
